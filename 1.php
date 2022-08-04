@@ -9,6 +9,13 @@ $array = [
     ['id' => 3, 'date' => "06.06.2020", 'name' => "test3"],
 ];
 
-print_r(array_unique(array_column($array, 'id')));
+$id = array_unique(array_column($array, 'id'));
 
+$array = array_filter($array, function ($key, $value) use ($id) {
+    return in_array($value, array_keys($id));
+}, ARRAY_FILTER_USE_BOTH);
+
+sort($array);
+
+print_r($array);
 ?>
