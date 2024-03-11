@@ -17,16 +17,14 @@ function before($mysqli, $catId)
  * не могу знать что будет в ответе так как не работал нативно с mysql
  * предполагаю что так будет корректно
  *
- * @param       $mysqli
- * @param  int  $catId
+ * @param  mysqli  $mysqli
+ * @param  int     $catId
  * @return array
  */
-function after($mysqli, int $catId): array
+function after(mysqli $mysqli, int $catId): array
 {
     $result = [];
-    $query  = $mysqli->query(
-        'select * from questions where catalog_id = ' . $catId . 'inner join from users using(name, gender)'
-    );
+    $query  = $mysqli->query('select * from questions where catalog_id = ' . $catId . 'inner join from users using(name, gender)');
     foreach ($query->fetch_assoc() as $row) {
         $result[] = [
             'question' => $row['question'],
